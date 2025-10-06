@@ -1,53 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta>
 	<title>ces+</title>
-	</meta>
 	<style>
-	html, body {
-		height: 100%;
-		margin: 0;
-	}
-	.grid-container {
-		display: grid;
-		width: 100vw;
-		height: 100vh;
-	}
-	.grid-item {
-		background-color: lightgray;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 2em;
-		border: 2px solid black;
-	}
-	.one{
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
-		grid-template-rows: 1fr 4fr 1fr 4fr;
-	}
-	.wide {
-		grid-column: span 3;
-	}
-	.full {
-		width: 100%;
-		height: 100%;
-	}
+		html, body { height: 100%; margin: 0; }
+		.grid-container {
+			display: grid;
+			width: 100vw; height: 90vh;
+			grid-template-columns: 1fr 1fr 1fr;
+			grid-template-rows: 1fr 4fr 1fr 4fr;
+		}
+		.grid-item {
+			background-color: lightgray;
+			display: flex; align-items: center; justify-content: center;
+			font-size: 1.2em; border: 2px solid black;
+		}
+		.wide { grid-column: span 3; }
+		.full { width: 100%; height: 100%; }
 	</style>
 </head>
 <body>
-	<div class="grid-container one full">
-		<div class="grid-item">
-			<form action="{{ url_for('index') }}" method="get" class="full">
-				<button type="submit" class="full">leave</button>
-			</form>
-		</div>
-		<div class="grid-item"><button class="full">mode = crypt</button></div>
-		<div class="grid-item"><button class="full">proceed</button></div>
-		<div class="grid-item wide"><textarea class="full" placeholder="Input text"></textarea></div>
-		<div class="grid-item wide"><input class="full" type="text" placeholder="Input key"></div>
-		<div class="grid-item wide"><textarea class="full" readonly placeholder="Output text"></textarea></div>
+<form action="{{ url_for('ces') }}" method="post" class="grid-container full">
+	<div class="grid-item">
+		<a href="{{ url_for('index') }}" class="full" style="display:flex;align-items:center;justify-content:center;text-decoration:none;">leave</a>
 	</div>
+	<div class="grid-item">
+		<button type="submit" name="toggle" class="full">
+			{% if mod %}mode = crypt
+			{% else %}mode = uncrypt
+			{% endif %}
+		</button>
+	</div>
+	<div class="grid-item">
+		<button type="submit" name="proceed" class="full">proceed</button>
+	</div>
+	<div class="grid-item wide">
+		<textarea class="full" name="text" placeholder="Input text">{{ request.form.text }}</textarea>
+	</div>
+	<div class="grid-item wide">
+		<input class="full" type="text" name="key" placeholder="Input key" value="{{ request.form.key }}">
+	</div>
+	<div class="grid-item wide">
+		<textarea class="full" readonly placeholder="Output text">{{ output }}</textarea>
+	</div>
+</form>
 </body>
 </html>

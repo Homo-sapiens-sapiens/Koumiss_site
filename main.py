@@ -1,26 +1,43 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 import ctypes
 
 
-cesp=ctypes.CDLL("cesp.dll")
+cesp=ctypes.CDLL("C:\programing\site\my\cesp.dll")
 
 cesp.ces.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_bool]
 cesp.ces.restype = ctypes.c_char_p
 
-a=input("text").encode("utf-8")
-b=input("key").encode("utf-8")
-c = bool.input("crypt?")
-print(cesp.ces(a, b, c).decode())
+#a=input("text").encode("utf-8")
+#b=input("key").encode("utf-8")
+#c = bool(int(input("crypt?")))
+#print(cesp.ces(a, b, c).decode())
 
-#app = Flask(__name__)
+app = Flask(__name__)
 
-#@app.route('/')
-#def index():
-#    return render_template('index.html')
+mode=True
 
-#@app.route('/ces')
-#def ces():
-#    return render_template('ces.html')
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-#if __name__ == '__main__':
-#    app.run()
+@app.route('/ces', methods=["GET", "POST"])
+def ces():
+    global mode
+    out = ""
+    if request.method == "POST":
+        if "toggle" in request.form:
+            mode = not mode
+        elif "proceed" in request.form:
+            text = request.form.get("text", "").encode("utf-8")
+            key = request.form.get("key", "").encode("utf-8")
+            if text and key:
+                res = cesp.ces(text, key, mode)
+                out = res.decode("utf-8")
+        else: return redirect(url_for('index'))
+    return render_template("ces.html", output=out, mod=mode)
+
+@app.route('/about')
+def about(): return render_template('about.html')
+
+if __name__ == '__main__':
+    app.run()

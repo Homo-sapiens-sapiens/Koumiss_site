@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import ctypes
 
-dll=ctypes.CDLL("C:\programing\site\my\dll.dll")
+dll=ctypes.CDLL("so.so")
 
 dll.ces.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_bool]
 dll.ces.restype = ctypes.c_char_p

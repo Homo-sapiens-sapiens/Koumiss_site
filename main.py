@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for
-import ctypes
+import ctypes, os, platform
 
-dll=ctypes.CDLL("so.so")
+if platform.system() == "Windows":
+    dll = ctypes.CDLL(os.path.abspath("cesp.dll"))
+else:
+    dll = ctypes.CDLL(os.path.abspath("cesp.so"))
 
 dll.ces.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_bool]
 dll.ces.restype = ctypes.c_char_p

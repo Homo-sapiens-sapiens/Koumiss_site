@@ -2,9 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for
 import ctypes, os, platform
 
 if platform.system() == "Windows":
-    dll = ctypes.CDLL(os.path.abspath("cesp.dll"))
+    dll = ctypes.CDLL(os.path.abspath("dll.dll"))
 else:
-    dll = ctypes.CDLL(os.path.abspath("cesp.so"))
+    dll = ctypes.CDLL(os.path.abspath("so.so"))
 
 dll.ces.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_bool]
 dll.ces.restype = ctypes.c_char_p
@@ -45,3 +45,4 @@ if __name__ == '__main__':
     from os import getenv
     port = int(getenv("PORT", 10000))
     app.run(host='0.0.0.0', port=port)
+

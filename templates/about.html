@@ -4,9 +4,9 @@
 	<title>home</title>
 	<style>
 		* {box-sizing: border-box;}
-		html, body {height: 100%;margin: 0;display: flex;justify-content: center;align-items: center;}
+		html, body {height: 100%;margin: 0;display: flex;justify-content: center;align-items: center;background-color: black;}
 		.grid-container {display: grid;}
-		.grid-item {background-color: lightgray;display: flex;align-items: center;justify-content: center;font-size: 2em;border: 2px solid black;}
+		.grid-item {display: flex;align-items: center;justify-content: center;font-size: 2em;border: 2px solid lime;}
 		.one {grid-template-columns: 1fr;grid-template-rows: 1fr;}
 		.half {width: 50vw;height: 100vh;}
 		.full {width: 100%;height: 100%;display: block;text-align: center;text-decoration: none;border: none;padding: 1em;font-size: 1em;}
@@ -15,7 +15,7 @@
 <body>
 	<div class="grid-container one half">
 		<div class="grid-item">
-			<textarea class="full" readonly>
+			<textarea class="full" readonly style="color: lime;background-color: black;">
 About me
 
 Nickname: uranium_hexafluoride

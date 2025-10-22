@@ -3,17 +3,37 @@
 <head>
 	<title>home</title>
 	<style>
-		* {box-sizing: border-box;}
-		html, body {height: 100%;margin: 0;display: flex;justify-content: center;align-items: center;background-color: black;}
-		.grid-container {display: grid;}
-		.grid-item {display: flex;align-items: center;justify-content: center;font-size: 2em;border: 2px solid lime;}
-		.one {grid-template-columns: 1fr;grid-template-rows: 1fr 3fr 3fr;}
-		.half {width: 50vw;height: 75vh;}
-		.full {width: 100%;height: 100%;display: block;text-align: center;text-decoration: none;border: none;font-size: 1em;background-color: black;color: lime;}
+		*{box-sizing: border-box}
+		html,body{
+			height:100%;
+			margin:0;
+			display:flex;
+			justify-content:center;
+			align-items:center;
+			background-color:black}
+		.grid-container{
+			display:grid;
+			grid-template-columns:1fr;
+			grid-template-rows:1fr 3fr 3fr}
+		.grid-item{
+			display:flex;
+			align-items:center;
+			justify-content:center;
+			font-size:2em;
+			border:2px solid lime}
+		.half{
+			width:50vw;
+			height:75vh}
+		.full{
+			width:100%;
+			height:100%;
+			font-size:1em;
+			background-color:black;
+			color:lime}
 	</style>
 </head>
 <body>
-	<div class="grid-container one half">
+	<div class="grid-container half">
 		<div class="grid-item">
 			<form action="{{ url_for('index') }}" method="get" class="full">
 				<button type="submit" class="full">leave</button>

@@ -3,20 +3,29 @@
 <head>
 	<title>{{ title }}</title>
 	<style>
-		html, body {height: 100%; margin: 0; background-color: black}
-		.grid-container {
-			display: grid;
-			width: 100vw; height: 90vh;
-			grid-template-columns: 1fr 1fr 1fr;
-			grid-template-rows: 1fr 4fr 1fr 4fr;
-		}
-		.grid-item {
-			color: lime;
-			display: flex; align-items: center; justify-content: center;
-			font-size: 1.2em; border: 2px solid lime;
-		}
-		.wide { grid-column: span 3; }
-		.full { width: 100%; height: 100%; background-color: black;color: lime;}
+		html,body{
+			height:100%;
+			margin:0}
+		.grid-container{
+			display:grid;
+			width:100vw;
+			height:90vh;
+			grid-template-columns:1fr 1fr 1fr;
+			grid-template-rows:1fr 4fr 1fr 4fr}
+		.grid-item{
+			color:lime;
+			display:flex;
+			align-items:center;
+			justify-content:center;
+			font-size:1.2em;
+			border:2px solid lime}
+		.wide{
+			grid-column:span 3;}
+		.full{
+			width:100%;
+			height:100%;
+			background-color:black;
+			color:lime}
 	</style>
 </head>
 <body>
@@ -35,13 +44,13 @@
 		<button type="submit" name="proceed" class="full">proceed</button>
 	</div>
 	<div class="grid-item wide">
-		<textarea class="full" name="text" placeholder="Input text">{{ request.form.text }}</textarea>
+		<textarea class="full" name="text" placeholder="Input text" style="border:2px solid lime">{{ request.form.text }}</textarea>
 	</div>
 	<div class="grid-item wide">
-		<input class="full" type="text" name="key" placeholder="Input key" value="{{ request.form.key }}">
+		<input class="full" type="text" name="key" placeholder="Input key" value="{{ request.form.key }}" style="border:2px solid lime">
 	</div>
 	<div class="grid-item wide">
-		<textarea class="full" readonly placeholder="Output text">{{ output }}</textarea>
+		<textarea class="full" readonly placeholder="Output text" style="border:2px solid lime">{{ output }}</textarea>
 	</div>
 </form>
 </body>

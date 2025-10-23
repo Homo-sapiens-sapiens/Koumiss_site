@@ -13,6 +13,9 @@ dll.mix.restype = ctypes.c_char_p
 dll.ces.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_bool]
 dll.ces.restype = ctypes.c_char_p
 
+dll.fill.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_bool]
+dll.fill.restype = ctypes.c_char_p
+
 app = Flask(__name__)
 
 mode=True
@@ -21,9 +24,9 @@ mode=True
 def index():
     return render_template('index.html')
 
-fun=[dll.ces, dll.mix]
-nms=["ces", "mix"]
-lks=["{{ url_for('ces') }}", "{{ url_for('mix') }}"]
+fun=[dll.ces, dll.mix, dll.fill]
+nms=["ces", "mix", "fill"]
+lks=["{{ url_for('ces') }}", "{{ url_for('mix') }}", "{{ url_for('fill') }}"]
 def crypt(n):
     global mode
     out = ""
@@ -45,6 +48,8 @@ def ces(): return crypt(0)
 @app.route('/mix', methods=["GET", "POST"])
 def mix(): return crypt(1)
 
+@app.route('/fill', methods=["GET", "POST"])
+def fill(): return crypt(2)
 
 @app.route('/menu')
 def menu(): return render_template('menu.html')
@@ -57,5 +62,4 @@ if __name__ == '__main__':
         app.run()
     else:
         port = int(getenv("PORT", 10000))
-
         app.run(host='0.0.0.0', port=port)

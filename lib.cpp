@@ -56,6 +56,7 @@ const char* fill(const char* inn, const char* key, bool mode){
 	int m = k.size();
 	int n = input.size();
 	static string out;
+	out.clear();
 	if(mode){
 		for(int i=0; i<n; i++){
 			for(int j=0; j<alph.find(k[i%m]); j++){out+=alph[rand()%88];}

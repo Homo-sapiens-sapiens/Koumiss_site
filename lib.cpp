@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <ctime>
 using namespace std;
 
 string alph = "0123456789`-=QWERTYUIOPASDFGHJKL;'ZXCVBNM,./*~[]qwertyuiop{}asdfghjkl!@#$%^&()_+zxcvbnm ";
@@ -13,13 +14,14 @@ extern "C" {
 const char* ces(const char* inn, const char* key, bool mode){
 	string input(inn);
 	string k(key);
+	int m = k.size();
 	int let;
 	static string out;
 	out.clear();
 	int mod = mode?1:-1;
 	for(int i=0; i<input.size(); i++){
 		let=alph.find(input[i]);
-		let+=alph.find(k[i%k.size()])*mod;
+		let+=alph.find(k[i%m])*mod;
 		if(let<0){let+=88;}
 		out+=alph[let%88];}
 	return out.c_str();}
@@ -46,11 +48,35 @@ const char* mix(const char* inn, const char* key, bool mode){
 			inds.erase(inds.begin()+alph.find(k[i%m])%s);}}
 	return out.c_str();}
 
-//const char* fill(const char* inn, const char* key, bool mode){
-	
+const char* fill(const char* inn, const char* key, bool mode){
+	srand(time(0));
+	string input(inn);
+	string k(key);
+	int m = k.size();
+	int n = input.size();
+	static string out;
+	if(mode){
+		for(int i=0; i<n; i++){
+			for(int j=0; j<k[i%m]; j++){out+=alph[rand()%88];}
+			out+=input[i];}
+		for(int j=0; j<k[n%m]; j++){out+=alph[rand()%88];}
+	else{
+		int c=alph.find(k[0]);
+		int i=1;
+		while(c<n){
+			out+=input[c];
+			c+=alph.find(k[i%m])+1;}
+			i++;}
+	return out.c_str();}
 
-/*int main(){
-	string a; string b; bool c;
-	cin>>a>>b>>c;
-	cout<<mix(a.c_str(),b.c_str(),c);
-}*/
+int main(){
+	string a, b;
+	bool c;
+	
+	/*srand(time(0));
+	string qwe;
+	for(int i=0; i<10; i++){qwe+=alph[rand()%88];}
+	cout<<qwe<<endl;
+	const char* rty=qwe.c_str();
+	string uio(rty);
+	cout<<uio;*/}

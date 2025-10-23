@@ -6,9 +6,10 @@ using namespace std;
 
 string alph = "0123456789`-=QWERTYUIOPASDFGHJKL;'ZXCVBNM,./*~[]qwertyuiop{}asdfghjkl!@#$%^&()_+zxcvbnm ";
 
-extern "C" {
+extern "C"{
 	__declspec(dllexport) const char* ces(const char* inn, const char* key, bool mode);
-	__declspec(dllexport) const char* mix(const char* inn, const char* key, bool mode);}
+	__declspec(dllexport) const char* mix(const char* inn, const char* key, bool mode);
+	__declspec(dllexport) const char* fill(const char* inn, const char* key, bool mode);}
 
 // Определение функции
 const char* ces(const char* inn, const char* key, bool mode){
@@ -57,26 +58,23 @@ const char* fill(const char* inn, const char* key, bool mode){
 	static string out;
 	if(mode){
 		for(int i=0; i<n; i++){
-			for(int j=0; j<k[i%m]; j++){out+=alph[rand()%88];}
+			for(int j=0; j<alph.find(k[i%m]); j++){out+=alph[rand()%88];}
 			out+=input[i];}
-		for(int j=0; j<k[n%m]; j++){out+=alph[rand()%88];}
+		for(int j=0; j<alph.find(k[n%m]); j++){out+=alph[rand()%88];}}
 	else{
 		int c=alph.find(k[0]);
 		int i=1;
 		while(c<n){
 			out+=input[c];
-			c+=alph.find(k[i%m])+1;}
-			i++;}
+			c+=alph.find(k[i%m])+1;
+			i++;}}
 	return out.c_str();}
 
+/*
 int main(){
 	string a, b;
 	bool c;
-	
-	/*srand(time(0));
-	string qwe;
-	for(int i=0; i<10; i++){qwe+=alph[rand()%88];}
-	cout<<qwe<<endl;
-	const char* rty=qwe.c_str();
-	string uio(rty);
-	cout<<uio;*/}
+	cin>>a>>b>>c;
+	const char* oo = fill(a.c_str(), b.c_str(), c);
+	string o(oo);
+	cout<<o<<endl;}*/
